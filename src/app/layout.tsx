@@ -1,3 +1,4 @@
+import { ModalProvider } from '@/app/contexts/ModalContext'
 import type { Metadata } from 'next'
 import { Kode_Mono } from 'next/font/google'
 import './globals.css'
@@ -8,7 +9,7 @@ const KodeMono = Kode_Mono({
 })
 
 export const metadata: Metadata = {
-	title: 'Pomodoro App',
+	title: 'Pomodoro',
 	description: 'A simple pomodoro timer app'
 }
 
@@ -23,7 +24,7 @@ export default function RootLayout({
 				suppressHydrationWarning
 				className={`${KodeMono.variable} antialiased flex items-center justify-center`}
 			>
-				{children}
+				<ModalProvider>{children}</ModalProvider>
 			</body>
 		</html>
 	)

@@ -1,5 +1,6 @@
+import { useModal } from '@/app/contexts/ModalContext'
+import { useTimerStore } from '@/lib/store/useTimerStore'
 import { useEffect } from 'react'
-import { useTimerStore } from '../store/useTimerStore'
 
 export function useTimer() {
 	const {
@@ -10,9 +11,12 @@ export function useTimer() {
 		pauseTimer,
 		resetTimer,
 		switchMode,
+		completeSession,
 		tick,
 		sessionsCompleted
 	} = useTimerStore()
+
+	const { openModal } = useModal()
 
 	useEffect(() => {
 		if (!isRunning) return
@@ -24,20 +28,24 @@ export function useTimer() {
 		return () => clearInterval(interval)
 	}, [tick, isRunning])
 
-	const toggleTimer = () => {
-		if (isRunning) {
-			pauseTimer()
-		} else {
-			startTimer()
-		}
+	// toggle timer
+	const toggle = () => {
+		if (isRunning) pauseTimer()
+		else startTimer()
 	}
 
+	// reset timer
 	const reset = () => {
-		resetTimer()
+		openModal('reset', resetTimer)
+	}
+
+	// complete session
+	const complete = () => {
+		openModal('skip', completeSession)
 	}
 
 	const switchTimerMode = (mode: 'pomodoro' | 'shortBreak' | 'longBreak') => {
-		switchMode(mode)
+		openModal('switch', () => switchMode(mode))
 	}
 
 	const totalTime = useTimerStore(state => state.settings[`${mode}Time`])
@@ -46,8 +54,9 @@ export function useTimer() {
 		timeLeft,
 		mode,
 		isRunning,
-		toggleTimer,
+		toggle,
 		reset,
+		complete,
 		switchTimerMode,
 		sessionsCompleted,
 		totalTime

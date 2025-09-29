@@ -20,25 +20,23 @@ export function ProgressRing({ timeLeft, totalTime, mode }: ProgressRingProps) {
 	}
 
 	return (
-		<>
-			<svg
-				height={radius * 2}
-				width={radius * 2}
-				className='transform -rotate-90 absolute'
-			>
-				<circle
-					stroke={getColor()}
-					fill='transparent'
-					strokeWidth={stroke}
-					strokeDasharray={circumference + ' ' + circumference}
-					strokeDashoffset={circumference - progress}
-					r={normalizedRadius}
-					cx={radius}
-					cy={radius}
-					strokeLinecap='round'
-					className='transition-all duration-1000 ease-linear'
-				/>
-			</svg>
-		</>
+		<svg
+			height={radius * 2}
+			width={radius * 2}
+			className='transform -rotate-90 absolute z-40' // z-40 чтобы быть выше контролов
+		>
+			<circle
+				stroke={getColor()}
+				fill='transparent'
+				strokeWidth={stroke}
+				strokeDasharray={circumference + ' ' + circumference}
+				strokeDashoffset={circumference - progress}
+				r={normalizedRadius}
+				cx={radius}
+				cy={radius}
+				strokeLinecap='round'
+				className='transition-all duration-1000 ease-linear'
+			/>
+		</svg>
 	)
 }

@@ -1,11 +1,13 @@
-export function TimerControlsItem({
+export function ModeSelectorItem({
 	currentMode,
 	name,
-	keyName
+	keyName,
+	onClick
 }: {
 	currentMode: string
 	name: string
 	keyName: string
+	onClick: () => void
 }) {
 	return (
 		<li
@@ -17,6 +19,7 @@ export function TimerControlsItem({
 							: ''
 					}
 					`}
+			onClick={onClick}
 		>
 			{name}
 		</li>

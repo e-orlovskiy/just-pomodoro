@@ -47,8 +47,10 @@ export const useTimerStore = create<TimerState>()(
 			pauseTimer: () => set({ isRunning: false }),
 			resetTimer: () => {
 				const state = get()
-				const newTime = state.settings[`${state.mode}Time`]
+				const newMode = 'pomodoro'
+				const newTime = state.settings[`${newMode}Time`]
 				set({
+					mode: newMode,
 					timeLeft: newTime,
 					isRunning: false
 				})
