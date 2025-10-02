@@ -10,13 +10,15 @@ const KodeMono = Kode_Mono({
 
 export const metadata: Metadata = {
 	title: 'Pomodoro',
-	description: 'A simple pomodoro timer app'
+	description: 'Pomodoro timer app'
 }
 
 export default function RootLayout({
-	children
+	children,
+	modal //@modal
 }: Readonly<{
 	children: React.ReactNode
+	modal: React.ReactNode // auto prop
 }>) {
 	return (
 		<html lang='en' suppressHydrationWarning>
@@ -24,7 +26,10 @@ export default function RootLayout({
 				suppressHydrationWarning
 				className={`${KodeMono.variable} antialiased flex items-center justify-center`}
 			>
-				<ModalProvider>{children}</ModalProvider>
+				<ModalProvider>
+					{children}
+					{modal} {/* @modal (settings) content*/}
+				</ModalProvider>
 			</body>
 		</html>
 	)

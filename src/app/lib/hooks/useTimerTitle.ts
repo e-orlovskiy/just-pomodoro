@@ -14,6 +14,8 @@ export function useTimerTitle({
 	isRunning,
 	isTimerCompleted = false
 }: UseTimerTitleProps) {
+	// initial
+
 	useEffect(() => {
 		let title: string
 
