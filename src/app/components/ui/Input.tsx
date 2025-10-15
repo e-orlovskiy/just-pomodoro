@@ -1,19 +1,26 @@
 export function Input({
 	value,
-	type
+	onChange
 }: {
 	value: number
-	type: 'input' | 'select' | 'slider' | 'toggle'
+	onChange?: (value: number) => void
 }) {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		let newValue = e.target.value.replace(/[^\d]/g, '')
+		if (+newValue < 0) newValue = '0'
+		if (+newValue > 360) newValue = '360'
+
+		if (onChange) onChange(Number(newValue))
+	}
+
 	return (
 		<>
-			{type === 'input' && (
-				<input
-					className='text-[var(--tertiary-color)] text-lg bg-[var(--secondary-color)] max-w-[100px] p-1 rounded-full text-center'
-					value={value}
-					type='text'
-				/>
-			)}
+			<input
+				className='text-[var(--tertiary-color)] text-lg bg-[var(--secondary-color)] w-[70px] h-[36px] p-1 rounded-full text-center border-none outline-none'
+				value={value}
+				type='text'
+				onChange={handleChange}
+			/>
 		</>
 	)
 }

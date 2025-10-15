@@ -21,7 +21,7 @@ export function SettingsSection({
 				<Image
 					src={ICONS_MAP[icon]}
 					alt={icon}
-					height={25}
+					height={20}
 					width={20}
 					objectFit='cover'
 				/>

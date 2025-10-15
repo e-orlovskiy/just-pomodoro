@@ -1,13 +1,56 @@
+import type { ISettingsGroup } from '../../lib/types'
+import { ISettings } from '../../lib/types'
 import { SettingsGroup } from '../ui/SettingsGroup'
 import { SettingsSection } from '../ui/SettingsSection'
 
-export function TimeSettings() {
+export function TimeSettings({
+	draftSettings,
+	onSettingsChange
+}: {
+	draftSettings: ISettings
+	onSettingsChange: (settings: Partial<ISettings>) => void
+}) {
+	const TIME_SETTINGS_GROUPS: ISettingsGroup[] = [
+		{
+			title: 'pomodoro',
+			value: draftSettings.pomodoroTime,
+			type: 'input',
+			onChange: (value: number | string | boolean) => {
+				if (typeof value === 'number') onSettingsChange({ pomodoroTime: value })
+			}
+		},
+		{
+			title: 'short break',
+			value: draftSettings.shortBreakTime,
+			type: 'input',
+			onChange: (value: number | string | boolean) => {
+				if (typeof value === 'number')
+					onSettingsChange({ shortBreakTime: value })
+			}
+		},
+		{
+			title: 'long break',
+			value: draftSettings.longBreakTime,
+			type: 'input',
+			onChange: (value: number | string | boolean) => {
+				if (typeof value === 'number')
+					onSettingsChange({ longBreakTime: value })
+			}
+		}
+	]
+
 	return (
-		<div className='flex flex-col gap-4 mt-4'>
+		<div className='flex flex-col gap-4 mt-3'>
 			<SettingsSection title={'Time'} icon={'time'}>
-				<SettingsGroup title='pomodoro' value={25} type='input' />
-				<SettingsGroup title='short break' value={5} type='input' />
-				<SettingsGroup title='long break' value={15} type='input' />
+				{TIME_SETTINGS_GROUPS.map(group => (
+					<SettingsGroup
+						key={group.title}
+						title={group.title}
+						value={group.value}
+						type={group.type}
+						onChange={group.onChange}
+					/>
+				))}
 			</SettingsSection>
 		</div>
 	)

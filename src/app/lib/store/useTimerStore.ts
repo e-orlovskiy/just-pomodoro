@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
+import { ISettings } from '../types'
 
 interface TimerState {
 	// 1. timer states
@@ -9,14 +10,7 @@ interface TimerState {
 	sessionsCompleted: number
 
 	// 2. settings
-	settings: {
-		pomodoroTime: number
-		shortBreakTime: number
-		longBreakTime: number
-		longBreakInterval: number
-		autoStartBreaks: boolean
-		autoStartPomodoros: boolean
-	}
+	settings: ISettings
 
 	// 3. actions
 	startTimer: () => void
@@ -41,7 +35,11 @@ export const useTimerStore = create<TimerState>()(
 				longBreakTime: 15 * 60,
 				longBreakInterval: 4,
 				autoStartBreaks: false,
-				autoStartPomodoros: false
+				autoStartPomodoros: false,
+				confirmActions: true,
+				notificationSound: 'default',
+				volume: 1,
+				browserNotifications: true
 			},
 			startTimer: () => set({ isRunning: true }),
 			pauseTimer: () => set({ isRunning: false }),
