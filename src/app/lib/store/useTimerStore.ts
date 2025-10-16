@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import { ISettings } from '../types'
+import { soundPlayer } from '../soundPlayer'
 
 interface TimerState {
 	// 1. timer states
@@ -37,7 +38,7 @@ export const useTimerStore = create<TimerState>()(
 				autoStartBreaks: false,
 				autoStartPomodoros: false,
 				confirmActions: true,
-				notificationSound: 'default',
+				notificationSound: 'bell-1',
 				volume: 1,
 				browserNotifications: true
 			},
@@ -59,7 +60,9 @@ export const useTimerStore = create<TimerState>()(
 				set({
 					mode,
 					timeLeft: newTime,
-					isRunning: false
+					isRunning:
+						state.settings.autoStartPomodoros &&
+						(state.mode === 'shortBreak' || state.mode === 'longBreak')
 				})
 			},
 			updateSettings: newSettings => {
@@ -95,11 +98,27 @@ export const useTimerStore = create<TimerState>()(
 				const nextModeTime = state.settings[`${nextMode}Time`]
 				const safeTimeLeft = Math.max(0, nextModeTime)
 
+				let shouldAutoStart = false
+				const currentMode = state.mode
+
+				if (currentMode === 'pomodoro') {
+					shouldAutoStart = state.settings.autoStartBreaks
+				} else {
+					shouldAutoStart = state.settings.autoStartPomodoros
+				}
+
+				if (state.settings.browserNotifications) {
+					soundPlayer.play(
+						state.settings.notificationSound,
+						state.settings.volume
+					)
+				}
+
 				set({
 					sessionsCompleted: newSessionsCompleted,
 					mode: nextMode,
 					timeLeft: safeTimeLeft,
-					isRunning: state.settings.autoStartBreaks && state.mode === 'pomodoro'
+					isRunning: shouldAutoStart
 				})
 			}
 		}),

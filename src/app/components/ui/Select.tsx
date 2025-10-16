@@ -30,6 +30,12 @@ export function Select({
 
 	const selectedOption = options.find(opt => opt.value === value)
 
+	const handleOptionClick = (optionValue: string) => {
+		onChange?.(optionValue)
+		setIsOpen(false)
+		// soundPlayer.play(optionValue, 0.7)
+	}
+
 	return (
 		<div className='relative' ref={dropdownRef}>
 			<button
@@ -43,7 +49,7 @@ export function Select({
           hover:bg-[var(--secondary-color)]/80
         '
 			>
-				<span>{selectedOption?.label} test</span>
+				<span>{selectedOption?.label}</span>
 				<svg
 					className={`w-4 h-4 transition-transform ${
 						isOpen ? 'rotate-180' : ''
@@ -73,8 +79,7 @@ export function Select({
 							key={option.value}
 							type='button'
 							onClick={() => {
-								onChange?.(option.value)
-								setIsOpen(false)
+								handleOptionClick(option.value)
 							}}
 							className='
                 w-full p-1 text-center text-[var(--tertiary-color)]

@@ -13,7 +13,8 @@ export function useTimer() {
 		switchMode,
 		completeSession,
 		tick,
-		sessionsCompleted
+		sessionsCompleted,
+		settings
 	} = useTimerStore()
 
 	const { openModal } = useModal()
@@ -36,16 +37,28 @@ export function useTimer() {
 
 	// reset timer
 	const reset = () => {
-		openModal('reset', resetTimer)
+		if (settings.confirmActions) {
+			openModal('reset', resetTimer)
+		} else {
+			resetTimer()
+		}
 	}
 
 	// complete session
 	const complete = () => {
-		openModal('skip', completeSession)
+		if (settings.confirmActions) {
+			openModal('skip', completeSession)
+		} else {
+			completeSession()
+		}
 	}
 
 	const switchTimerMode = (mode: 'pomodoro' | 'shortBreak' | 'longBreak') => {
-		openModal('switch', () => switchMode(mode))
+		if (settings.confirmActions) {
+			openModal('switch', () => switchMode(mode))
+		} else {
+			switchMode(mode)
+		}
 	}
 
 	const totalTime = useTimerStore(state => state.settings[`${mode}Time`])

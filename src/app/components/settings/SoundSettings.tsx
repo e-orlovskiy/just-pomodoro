@@ -1,25 +1,19 @@
-import type { ISettingsGroup } from '../../lib/types'
+import { createSoundSettings } from '@/app/lib/config/settings'
 import { SettingsGroup } from '../ui/SettingsGroup'
 import { SettingsSection } from '../ui/SettingsSection'
+import { ISettings } from '@/app/lib/types'
 
-export function SoundSettings() {
-	const SOUND_SETTINGS_GROUPS: ISettingsGroup[] = [
-		{
-			title: 'notification sound',
-			value: 'Ring',
-			type: 'select'
-		},
-		{
-			title: 'volume',
-			value: 50,
-			type: 'slider'
-		},
-		{
-			title: 'browser notifications',
-			value: true,
-			type: 'switch'
-		}
-	]
+export function SoundSettings({
+	draftSettings,
+	onSettingsChange
+}: {
+	draftSettings: ISettings
+	onSettingsChange: (settings: Partial<ISettings>) => void
+}) {
+	const SOUND_SETTINGS_GROUPS = createSoundSettings(
+		draftSettings,
+		onSettingsChange
+	)
 
 	return (
 		<div className='flex flex-col gap-4 mt-3'>
@@ -30,6 +24,11 @@ export function SoundSettings() {
 						title={group.title}
 						value={group.value}
 						type={group.type}
+						options={group.options}
+						min={group.min}
+						max={group.max}
+						step={group.step}
+						onChange={group.onChange}
 					/>
 				))}
 			</SettingsSection>

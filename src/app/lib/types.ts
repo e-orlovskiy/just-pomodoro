@@ -3,6 +3,10 @@ export interface ISettingsGroup {
 	value: string | number | boolean
 	type: 'input' | 'select' | 'slider' | 'switch'
 	onChange: (newValue: string | number | boolean) => void
+	options?: { value: string; label: string }[]
+	min?: number
+	max?: number
+	step?: number
 }
 
 export interface ISettings {

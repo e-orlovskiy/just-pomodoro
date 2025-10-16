@@ -7,7 +7,7 @@ export function Input({
 }) {
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		let newValue = e.target.value.replace(/[^\d]/g, '')
-		if (+newValue < 0) newValue = '0'
+		if (+newValue <= 0) newValue = '1'
 		if (+newValue > 360) newValue = '360'
 
 		if (onChange) onChange(Number(newValue))

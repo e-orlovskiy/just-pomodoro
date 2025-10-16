@@ -7,11 +7,19 @@ export function SettingsGroup({
 	title,
 	value,
 	type,
+	options,
+	min,
+	max,
+	step,
 	onChange
 }: {
 	title: string
 	value: string | number | boolean
 	type: 'input' | 'select' | 'slider' | 'switch'
+	options?: { value: string; label: string }[]
+	min?: number
+	max?: number
+	step?: number
 	onChange: (value: string | number | boolean) => void
 }) {
 	return (
@@ -23,22 +31,21 @@ export function SettingsGroup({
 			)}
 			{/* Для переключателей */}
 			{type === 'switch' && typeof value === 'boolean' && (
-				<Switch value={value} />
+				<Switch value={value} onChange={onChange} />
 			)}
 			{/* Для селектов */}
-			{type === 'select' && (
-				<Select
-					value={value as string}
-					options={[
-						{ value: 'ring', label: 'Ring' },
-						{ value: 'bell', label: 'Bell' },
-						{ value: 'chime', label: 'Chime' }
-					]}
-				/>
+			{type === 'select' && typeof value === 'string' && (
+				<Select value={value} options={options || []} onChange={onChange} />
 			)}
 			{/* Для слайдеров */}
 			{type === 'slider' && typeof value === 'number' && (
-				<Slider value={value} />
+				<Slider
+					value={value}
+					onChange={onChange}
+					min={min}
+					max={max}
+					step={step}
+				/>
 			)}
 		</div>
 	)

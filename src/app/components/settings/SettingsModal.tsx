@@ -39,8 +39,14 @@ export function SettingsModal({ onClose }: SettingsModalProps) {
 				draftSettings={settings.draftSettings}
 				onSettingsChange={settings.updateDraftSettings}
 			/>
-			<BehaviorSettings />
-			<SoundSettings />
+			<BehaviorSettings
+				draftSettings={settings.draftSettings}
+				onSettingsChange={settings.updateDraftSettings}
+			/>
+			<SoundSettings
+				draftSettings={settings.draftSettings}
+				onSettingsChange={settings.updateDraftSettings}
+			/>
 			<div className='flex justify-between mt-3 gap-3'>
 				<Button onClick={handleClose}>Cancel</Button>
 				<Button onClick={handleSave}>Save</Button>
