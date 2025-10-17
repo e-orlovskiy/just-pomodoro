@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import { ISettings } from '../types'
 import { soundPlayer } from '../soundPlayer'
+import { notificationManager } from '../notifications'
 
 interface TimerState {
 	// 1. timer states
@@ -40,7 +41,8 @@ export const useTimerStore = create<TimerState>()(
 				confirmActions: true,
 				notificationSound: 'bell-1',
 				volume: 1,
-				browserNotifications: true
+				step: 0.1,
+				browserNotifications: false
 			},
 			startTimer: () => set({ isRunning: true }),
 			pauseTimer: () => set({ isRunning: false }),
@@ -107,11 +109,46 @@ export const useTimerStore = create<TimerState>()(
 					shouldAutoStart = state.settings.autoStartPomodoros
 				}
 
-				if (state.settings.browserNotifications) {
+				// play sound
+				if (state.settings.notificationSound) {
 					soundPlayer.play(
 						state.settings.notificationSound,
 						state.settings.volume
 					)
+				}
+
+				// browser notification
+				if (
+					state.settings.browserNotifications &&
+					notificationManager.isSupported()
+				) {
+					console.log('🔔 Attempting to show notification for:', state.mode)
+					const modeMessages = {
+						pomodoro: {
+							title: 'Pomodoro Completed! 🎉',
+							body: shouldAutoStart
+								? 'Time for a break!\nYour break session will start automatically.'
+								: 'Time for a break!\nGo to browser and start your break session!'
+						},
+						shortBreak: {
+							title: 'Break Time Over! ⏱️',
+							body: shouldAutoStart
+								? 'Time for a pomodoro!\nYour pomodoro session will start automatically.'
+								: 'Time for a pomodoro!\nGo to browser and start your pomodoro session!'
+						},
+						longBreak: {
+							title: 'Long Break Finished 🌟',
+							body: shouldAutoStart
+								? 'Hope you enjoyed your break! Time for a pomodoro!\nYour pomodoro session will start automatically.'
+								: 'Hope you enjoyed your break! Time for a pomodoro!\nGo to browser and start your pomodoro session!'
+						}
+					}
+					const message = modeMessages[currentMode]
+					notificationManager.showNotification(message.title, {
+						body: message.body,
+						tag: 'pomodoro-timer',
+						requireInteraction: true
+					})
 				}
 
 				set({

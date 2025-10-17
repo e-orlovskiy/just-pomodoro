@@ -6,6 +6,7 @@ export interface ISettingsGroup {
 	options?: { value: string; label: string }[]
 	min?: number
 	max?: number
+	tooltip?: string
 	step?: number
 }
 
@@ -19,5 +20,6 @@ export interface ISettings {
 	confirmActions: boolean
 	notificationSound: string
 	volume: number
+	step: number
 	browserNotifications: boolean
 }

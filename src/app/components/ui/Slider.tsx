@@ -2,18 +2,21 @@ export function Slider({
 	value,
 	onChange,
 	min = 0,
-	max = 100
+	max = 100,
+	step = 0.1
 }: {
 	value: number
 	onChange?: (value: number) => void
 	min?: number
 	max?: number
+	step?: number
 }) {
 	return (
 		<input
 			type='range'
 			min={min}
 			max={max}
+			step={step}
 			value={value}
 			onChange={onChange ? e => onChange(Number(e.target.value)) : undefined}
 			className='

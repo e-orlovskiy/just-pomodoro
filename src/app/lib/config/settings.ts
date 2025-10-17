@@ -1,5 +1,6 @@
 import { ISettings, ISettingsGroup } from '../types'
 import { soundPlayer } from '../soundPlayer'
+import { notificationManager } from '../notifications'
 
 // 1. for time settings
 export const createTimeSettings = (
@@ -81,7 +82,8 @@ export const createBehaviorSettings = (
 // 3. for sound settings
 export const createSoundSettings = (
 	draftSettings: ISettings,
-	onSettingsChange: (settings: Partial<ISettings>) => void
+	onSettingsChange: (settings: Partial<ISettings>) => void,
+	browserNotificationTooltip?: string
 ): ISettingsGroup[] => [
 	{
 		title: 'notification sound',
@@ -115,8 +117,14 @@ export const createSoundSettings = (
 		title: 'browser notifications',
 		value: draftSettings.browserNotifications,
 		type: 'switch',
+		tooltip: browserNotificationTooltip,
 		onChange: (value: number | string | boolean) => {
 			if (typeof value !== 'boolean') return
+			if (value && !notificationManager.isSupported()) {
+				alert('Browser notifications are not supported in your browser')
+				return
+			}
+
 			onSettingsChange({ browserNotifications: value })
 		}
 	}
