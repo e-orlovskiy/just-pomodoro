@@ -53,7 +53,8 @@ export const useTimerStore = create<TimerState>()(
 				set({
 					mode: newMode,
 					timeLeft: newTime,
-					isRunning: false
+					isRunning: false,
+					sessionsCompleted: 0
 				})
 			},
 			switchMode: mode => {
@@ -68,10 +69,15 @@ export const useTimerStore = create<TimerState>()(
 				})
 			},
 			updateSettings: newSettings => {
-				set(state => ({
-					settings: { ...state.settings, ...newSettings },
-					timeLeft: newSettings.pomodoroTime || state.timeLeft
-				}))
+				set(state => {
+					const updatedSettings = { ...state.settings, ...newSettings }
+					const currentModeTime = updatedSettings[`${state.mode}Time`]
+
+					return {
+						settings: updatedSettings,
+						timeLeft: currentModeTime
+					}
+				})
 			},
 			tick: () => {
 				const state = get()

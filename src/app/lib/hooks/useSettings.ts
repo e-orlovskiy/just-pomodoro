@@ -6,6 +6,7 @@ import { notificationManager } from '../notifications'
 export function useSettings() {
 	const originalSettings = useTimerStore(state => state.settings)
 	const updateSettings = useTimerStore(state => state.updateSettings)
+	const resetTimer = useTimerStore(state => state.resetTimer)
 
 	const [draftSettings, setDraftSettings] = useState<ISettings>({
 		...originalSettings,
@@ -24,7 +25,6 @@ export function useSettings() {
 	//   }
 	// }, [draftSettings.browserNotifications])
 
-	// В useSettings.ts - обнови updateDraftSettings
 	const updateDraftSettings = async (newSettings: Partial<ISettings>) => {
 		if (newSettings.browserNotifications === true) {
 			if (!notificationManager.isSupported()) {
@@ -46,16 +46,23 @@ export function useSettings() {
 	}
 
 	const saveSettings = () => {
+		resetTimer()
 		updateSettings({
 			...draftSettings,
 			pomodoroTime: draftSettings.pomodoroTime * 60,
 			shortBreakTime: draftSettings.shortBreakTime * 60,
 			longBreakTime: draftSettings.longBreakTime * 60
 		})
+
+		// for animation
+		setTimeout(() => (document.title = 'Pomodoro Timer'), 0)
 	}
 
 	const resetSettings = () => {
-		setDraftSettings(originalSettings)
+		// for animation
+		setTimeout(() => {
+			setDraftSettings(originalSettings)
+		}, 100)
 	}
 
 	return {

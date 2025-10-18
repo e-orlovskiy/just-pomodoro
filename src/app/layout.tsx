@@ -21,9 +21,8 @@ export default function RootLayout({
 	modal: React.ReactNode // auto prop
 }>) {
 	return (
-		<html lang='en' suppressHydrationWarning>
+		<html lang='en'>
 			<body
-				suppressHydrationWarning
 				className={`${KodeMono.variable} antialiased flex items-center justify-center`}
 			>
 				<ModalProvider>

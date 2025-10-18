@@ -24,6 +24,7 @@ export function TimeSettings({
 						title={group.title}
 						value={group.value}
 						type={group.type}
+						tooltip={group.tooltip}
 						onChange={group.onChange}
 					/>
 				))}

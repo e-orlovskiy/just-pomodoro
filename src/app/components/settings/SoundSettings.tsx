@@ -1,12 +1,10 @@
-// components/settings/SoundSettings.tsx
 'use client'
 
 import { createSoundSettings } from '@/app/lib/config/settings'
-import { notificationManager } from '@/app/lib/notifications'
 import { SettingsGroup } from '../ui/SettingsGroup'
 import { SettingsSection } from '../ui/SettingsSection'
 import { ISettings } from '@/app/lib/types'
-import { useState, useEffect } from 'react'
+import { useNotificationPermission } from '@/app/lib/hooks/useNotificationPermission'
 
 export function SoundSettings({
 	draftSettings,
@@ -15,36 +13,12 @@ export function SoundSettings({
 	draftSettings: ISettings
 	onSettingsChange: (settings: Partial<ISettings>) => void
 }) {
-	const [permissionStatus, setPermissionStatus] = useState<
-		'granted' | 'denied' | 'default'
-	>('default')
-
-	useEffect(() => {
-		if (!notificationManager.isSupported()) return
-
-		setPermissionStatus(notificationManager.getPermissionStatus())
-	}, [draftSettings.browserNotifications])
-
-	const getBrowserNotificationsTooltip = () => {
-		const statusText =
-			permissionStatus === 'granted'
-				? '\n\nBrowser notifications currently [enabled], and this setting can be turned on'
-				: permissionStatus === 'denied'
-				? '\n\nBrowser notifications currently [blocked]'
-				: '\n\nPermission not yet granted'
-
-		const instruction =
-			permissionStatus === 'denied'
-				? '\n\nTo enable: \nclick the lock/info icon in address bar → Notifications → Allow → Refresh page'
-				: ''
-
-		return `Show system notifications when timer completes. ${statusText}${instruction}`
-	}
+	const permissionStatus = useNotificationPermission()
 
 	const SOUND_SETTINGS_GROUPS = createSoundSettings(
 		draftSettings,
 		onSettingsChange,
-		getBrowserNotificationsTooltip()
+		permissionStatus
 	)
 
 	return (

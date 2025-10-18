@@ -7,11 +7,7 @@ import { BehaviorSettings } from './BehaviorSettings'
 import { SoundSettings } from './SoundSettings'
 import { TimeSettings } from './TimeSettings'
 
-interface SettingsModalProps {
-	onClose?: () => void
-}
-
-export function SettingsModal({ onClose }: SettingsModalProps) {
+export function SettingsModal() {
 	const router = useRouter()
 	const settings = useSettings()
 

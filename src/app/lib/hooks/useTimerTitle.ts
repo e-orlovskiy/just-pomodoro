@@ -1,23 +1,17 @@
 import { useEffect } from 'react'
 import { formatTime } from '../utils/formatTime'
+import { useTimerStore } from '../store/useTimerStore'
 
-interface UseTimerTitleProps {
-	timeLeft: number
-	mode: 'pomodoro' | 'shortBreak' | 'longBreak'
-	isRunning: boolean
-	isTimerCompleted?: boolean
-}
-
-export function useTimerTitle({
-	timeLeft,
-	mode,
-	isRunning,
-	isTimerCompleted = false
-}: UseTimerTitleProps) {
-	// initial
+export function useTimerTitle() {
+	const timeLeft = useTimerStore(state => state.timeLeft)
+	const mode = useTimerStore(state => state.mode)
+	const isRunning = useTimerStore(state => state.isRunning)
+	const isTimerCompleted = timeLeft === 0
 
 	useEffect(() => {
 		let title: string
+
+		console.log('testing')
 
 		if (isTimerCompleted) {
 			title = "Time's up!"
@@ -33,11 +27,7 @@ export function useTimerTitle({
 			title = `${statusIcon} ${timeString} - ${modeString}`
 		}
 
-		const previousTitle = document.title
+		console.log('Setting title:', title)
 		document.title = title
-
-		return () => {
-			document.title = previousTitle
-		}
 	}, [timeLeft, mode, isRunning, isTimerCompleted])
 }

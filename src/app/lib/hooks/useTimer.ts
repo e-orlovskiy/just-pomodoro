@@ -58,6 +58,7 @@ export function useTimer() {
 			openModal('switch', () => switchMode(mode))
 		} else {
 			switchMode(mode)
+			pauseTimer()
 		}
 	}
 

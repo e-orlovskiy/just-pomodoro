@@ -1,6 +1,7 @@
 import { ISettings, ISettingsGroup } from '../types'
 import { soundPlayer } from '../soundPlayer'
 import { notificationManager } from '../notifications'
+import { getTooltipContent } from '../utils/tooltipContent'
 
 // 1. for time settings
 export const createTimeSettings = (
@@ -8,7 +9,7 @@ export const createTimeSettings = (
 	onSettingsChange: (settings: Partial<ISettings>) => void
 ): ISettingsGroup[] => [
 	{
-		title: 'pomodoro',
+		title: 'pomodoro (minutes)',
 		value: draftSettings.pomodoroTime,
 		type: 'input',
 		onChange: (value: number | string | boolean) => {
@@ -17,7 +18,7 @@ export const createTimeSettings = (
 		}
 	},
 	{
-		title: 'short break',
+		title: 'short break (minutes)',
 		value: draftSettings.shortBreakTime,
 		type: 'input',
 		onChange: (value: number | string | boolean) => {
@@ -26,7 +27,7 @@ export const createTimeSettings = (
 		}
 	},
 	{
-		title: 'long break',
+		title: 'long break (minutes)',
 		value: draftSettings.longBreakTime,
 		type: 'input',
 		onChange: (value: number | string | boolean) => {
@@ -45,6 +46,9 @@ export const createBehaviorSettings = (
 		title: 'long break interval',
 		value: draftSettings.longBreakInterval,
 		type: 'input',
+		tooltip: getTooltipContent('long-break-interval', {
+			currentValue: draftSettings.longBreakInterval
+		}),
 		onChange: (value: number | string | boolean) => {
 			if (typeof value !== 'number') return
 			onSettingsChange({ longBreakInterval: value })
@@ -54,6 +58,9 @@ export const createBehaviorSettings = (
 		title: 'auto start breaks',
 		value: draftSettings.autoStartBreaks,
 		type: 'switch',
+		tooltip: getTooltipContent('auto-start-breaks', {
+			enabled: draftSettings.autoStartBreaks
+		}),
 		onChange: (value: number | string | boolean) => {
 			if (typeof value !== 'boolean') return
 			onSettingsChange({ autoStartBreaks: value })
@@ -63,6 +70,9 @@ export const createBehaviorSettings = (
 		title: 'auto start pomodoros',
 		value: draftSettings.autoStartPomodoros,
 		type: 'switch',
+		tooltip: getTooltipContent('auto-start-pomodoros', {
+			enabled: draftSettings.autoStartPomodoros
+		}),
 		onChange: (value: number | string | boolean) => {
 			if (typeof value !== 'boolean') return
 			onSettingsChange({ autoStartPomodoros: value })
@@ -72,6 +82,9 @@ export const createBehaviorSettings = (
 		title: 'confirm actions',
 		value: draftSettings.confirmActions,
 		type: 'switch',
+		tooltip: getTooltipContent('confirm-actions', {
+			enabled: draftSettings.confirmActions
+		}),
 		onChange: (value: number | string | boolean) => {
 			if (typeof value !== 'boolean') return
 			onSettingsChange({ confirmActions: value })
@@ -83,7 +96,7 @@ export const createBehaviorSettings = (
 export const createSoundSettings = (
 	draftSettings: ISettings,
 	onSettingsChange: (settings: Partial<ISettings>) => void,
-	browserNotificationTooltip?: string
+	permissionStatus: 'granted' | 'denied' | 'default'
 ): ISettingsGroup[] => [
 	{
 		title: 'notification sound',
@@ -97,7 +110,6 @@ export const createSoundSettings = (
 		onChange: (value: number | string | boolean) => {
 			if (typeof value !== 'string') return
 			onSettingsChange({ notificationSound: value })
-
 			soundPlayer.play(value, draftSettings.volume)
 		}
 	},
@@ -117,7 +129,10 @@ export const createSoundSettings = (
 		title: 'browser notifications',
 		value: draftSettings.browserNotifications,
 		type: 'switch',
-		tooltip: browserNotificationTooltip,
+		tooltip: getTooltipContent('browser-notifications', {
+			permissionStatus,
+			enabled: draftSettings.browserNotifications
+		}),
 		onChange: (value: number | string | boolean) => {
 			if (typeof value !== 'boolean') return
 			if (value && !notificationManager.isSupported()) {

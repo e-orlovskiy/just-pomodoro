@@ -19,14 +19,7 @@ export default function Home() {
 		switchTimerMode
 	} = useTimer()
 
-	const isTimerCompleted = timeLeft === 0
-
-	useTimerTitle({
-		timeLeft,
-		mode,
-		isRunning,
-		isTimerCompleted
-	})
+	useTimerTitle()
 
 	return (
 		<div className='bg-[var(--primary-color)] h-full flex items-center p-4 flex-col min-w-lg justify-between'>

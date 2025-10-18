@@ -8,7 +8,7 @@ export function Header() {
 				Just Pomodoro
 			</h1>
 			<div className='flex gap-2'>
-				<Icon name='analytics' />
+				{/* <Icon name='analytics' /> */}
 				<Link href='/settings'>
 					<Icon name='settings' />
 				</Link>
