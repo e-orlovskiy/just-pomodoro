@@ -43,12 +43,7 @@ export function TimerDisplay({
 				isRunning={isRunning}
 			/>
 
-			<div
-				className='flex flex-col items-center justify-center w-full h-full rounded-full bg-[var(--secondary-color)] z-20 relative'
-				style={{
-					boxShadow: '0 0 40px 2px #ffffff1d'
-				}}
-			>
+			<div className='flex flex-col items-center justify-center w-full h-full rounded-full bg-[var(--secondary-color)] z-20 relative'>
 				<ProgressRing timeLeft={time} totalTime={totalTime} mode={mode} />
 
 				<p className='text-7xl font-bold text-[var(--tertiary-color)] z-30 relative'>

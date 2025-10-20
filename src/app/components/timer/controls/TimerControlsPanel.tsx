@@ -33,9 +33,6 @@ export function TimerControlsPanel({
 							e.stopPropagation()
 							control.action()
 						}}
-						style={{
-							boxShadow: '0 0 11px 1px #ffffff1d'
-						}}
 						className={`
 						group rounded-full 
 						text-center
