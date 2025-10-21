@@ -14,9 +14,9 @@ export function ProgressRing({ timeLeft, totalTime, mode }: ProgressRingProps) {
 	const progress = ((totalTime - timeLeft) / totalTime) * circumference
 
 	const getColor = () => {
-		if (mode === 'pomodoro') return 'var(--primary-color)'
-		if (mode === 'shortBreak') return 'var(--primary-color)'
-		if (mode === 'longBreak') return 'var(--primary-color)'
+		if (mode === 'pomodoro') return 'var(--fourtiary-color)'
+		if (mode === 'shortBreak') return 'var(--fourtiary-color)'
+		if (mode === 'longBreak') return 'var(--fourtiary-color)'
 	}
 
 	return (

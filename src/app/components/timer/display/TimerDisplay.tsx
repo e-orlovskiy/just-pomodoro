@@ -2,6 +2,7 @@ import { TimerControlsPanel } from '@/components/timer/controls/TimerControlsPan
 import { ProgressRing } from '@/components/timer/display/ProgressRing'
 import { formatTime } from '@/lib/utils/formatTime'
 import { useState } from 'react'
+import Image from 'next/image'
 
 interface TimerDisplayProps {
 	time: number
@@ -45,7 +46,7 @@ export function TimerDisplay({
 
 			<div className='flex flex-col items-center justify-center w-full h-full rounded-full bg-[var(--secondary-color)] z-20 relative'>
 				<ProgressRing timeLeft={time} totalTime={totalTime} mode={mode} />
-
+				<div className='flex items-center absolute top-16 gap-2'></div>
 				<p className='text-7xl font-bold text-[var(--tertiary-color)] z-30 relative'>
 					{formatTime(time)}
 				</p>

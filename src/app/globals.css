@@ -4,7 +4,7 @@
 	--primary-color: #c4c4c4;
 	--secondary-color: #ffffff;
 	--tertiary-color: #101010;
-	--fourtiary-color: #00000099;
+	--fourtiary-color: #999999;
 	--font-sans: 'Kode Mono', monospace;
 }
 
@@ -61,4 +61,18 @@ body {
 
 .animate-scaleIn {
 	animation: scaleIn 0.3s ease-out;
+}
+
+ul > li,
+ol > li {
+	list-style: none;
+}
+
+.scrollbar-hide {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+	display: none; /* Chrome, Safari and Opera */
 }

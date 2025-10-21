@@ -35,8 +35,8 @@ class NotificationManager {
 		}
 
 		const notification = new Notification(title, {
-			icon: '/icons/skip.svg', // ?change later & check url
-			badge: '/icons/play.svg',
+			icon: '/icons/pomodoro-logo-with-bg.svg',
+			badge: '/icons/pomodoro-logo-with-bg.svg',
 			...options
 		})
 

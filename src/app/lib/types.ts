@@ -23,3 +23,12 @@ export interface ISettings {
 	step: number
 	browserNotifications: boolean
 }
+
+export interface ITodo {
+	id: string
+	text: string
+	isDone: boolean
+	remove?: (id: string) => void
+	edit?: (id: string, newText: string) => void
+	toggle?: (id: string) => void
+}
