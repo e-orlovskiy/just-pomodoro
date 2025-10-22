@@ -4,10 +4,17 @@ interface ProgressRingProps {
 	timeLeft: number
 	totalTime: number
 	mode: 'pomodoro' | 'shortBreak' | 'longBreak'
+	radius: number
+	classname?: string
 }
 
-export function ProgressRing({ timeLeft, totalTime, mode }: ProgressRingProps) {
-	const radius = 180
+export function ProgressRing({
+	timeLeft,
+	totalTime,
+	mode,
+	radius,
+	classname
+}: ProgressRingProps) {
 	const stroke = 12
 	const normalizedRadius = radius - stroke / 2
 	const circumference = 2 * Math.PI * normalizedRadius
@@ -23,7 +30,7 @@ export function ProgressRing({ timeLeft, totalTime, mode }: ProgressRingProps) {
 		<svg
 			height={radius * 2}
 			width={radius * 2}
-			className='transform -rotate-90 absolute z-40' // z-40 чтобы быть выше контролов
+			className={`transform -rotate-90 absolute z-40 ${classname}`}
 		>
 			<circle
 				stroke={getColor()}

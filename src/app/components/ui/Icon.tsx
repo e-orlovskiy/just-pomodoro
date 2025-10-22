@@ -16,7 +16,7 @@ export function Icon({
 
 	return (
 		<Image
-			className='cursor-pointer opacity-60 hover:opacity-100 transition-opacity duration-100'
+			className='cursor-pointer opacity-60 hover:opacity-100 transition-opacity duration-100 scale-90 sm:scale-100'
 			src={iconPath}
 			alt='header-icon'
 			width={28}

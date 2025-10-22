@@ -33,7 +33,7 @@ export function TimerDisplay({
 
 	return (
 		<div
-			className='relative w-[385px] h-[385px] rounded-full '
+			className='relative w-[285px] h-[285px] sm:w-[385px] sm:h-[385px] hover:rounded-full '
 			onClick={() => setShowControls(!showControls)}
 		>
 			<TimerControlsPanel
@@ -45,13 +45,26 @@ export function TimerDisplay({
 			/>
 
 			<div className='flex flex-col items-center justify-center w-full h-full rounded-full bg-[var(--secondary-color)] z-20 relative'>
-				<ProgressRing timeLeft={time} totalTime={totalTime} mode={mode} />
+				<ProgressRing
+					timeLeft={time}
+					totalTime={totalTime}
+					mode={mode}
+					radius={130}
+					classname='block sm:hidden'
+				/>
+				<ProgressRing
+					timeLeft={time}
+					totalTime={totalTime}
+					mode={mode}
+					radius={180}
+					classname='hidden sm:block'
+				/>
 				<div className='flex items-center absolute top-16 gap-2'></div>
-				<p className='text-7xl font-bold text-[var(--tertiary-color)] z-30 relative'>
+				<p className='text-5xl sm:text-7xl font-bold text-[var(--tertiary-color)] z-30 relative'>
 					{formatTime(time)}
 				</p>
 
-				<p className='absolute bottom-22 text-2xl text-[var(--fourtiary-color)] z-30'>
+				<p className='absolute bottom-22 text-xl sm:text-2xl text-[var(--fourtiary-color)] z-30'>
 					{MODE_MAP[mode]}
 				</p>
 			</div>

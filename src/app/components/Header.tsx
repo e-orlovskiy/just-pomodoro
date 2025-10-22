@@ -11,9 +11,9 @@ export function Header() {
 					alt='pomodoro'
 					width={28}
 					height={28}
-					className='translate-y-[-2px]'
+					className='translate-y-[-2px] scale-90 sm:scale-100'
 				/>
-				<h1 className='text-2xl font-bold text-[var(--tertiary-color)]'>
+				<h1 className='text-xl sm:text-2xl font-bold text-[var(--tertiary-color)]'>
 					Just Pomodoro
 				</h1>
 			</div>

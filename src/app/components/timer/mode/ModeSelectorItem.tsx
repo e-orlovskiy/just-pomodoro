@@ -12,7 +12,7 @@ export function ModeSelectorItem({
 	return (
 		<li
 			className={`
-					flex-1 px-4 py-2 rounded-full text-center cursor-pointer
+					flex-1 flex items-center justify-center text-xs px-1 py-1 sm:text-base sm:px-4 sm:py-2 rounded-full text-center cursor-pointer
 					${
 						currentMode === keyName
 							? 'bg-[var(--fourtiary-color)] text-[var(--primary-color)] font-bold'

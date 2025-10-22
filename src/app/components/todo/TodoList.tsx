@@ -12,8 +12,14 @@ export function TodoList() {
 		toggleStoredTodoStatus
 	} = useTodoList()
 
+	const [showTodoList, setShowTodoList] = useState(true)
+
 	return (
-		<div className='flex rounded-2xl flex-col h-[180px] w-full flex-grow-0 bg-[var(--secondary-color)] relative p-3'>
+		<div
+			className={`flex rounded-2xl flex-col h-[180px] w-full flex-grow-0 bg-[var(--secondary-color)] relative p-3 ${
+				showTodoList ? 'flex' : 'hidden'
+			}`}
+		>
 			<div className='relative flex-1 overflow-hidden'>
 				<div
 					className='absolute bottom-0 left-0 right-0 h-3 pointer-events-none z-50'
@@ -24,7 +30,19 @@ export function TodoList() {
 					}}
 				/>
 
-				<ul className='flex flex-col gap-2 h-full overflow-y-auto scrollbar-hide'>
+				<ul className='flex flex-col gap-1 h-full overflow-y-auto scrollbar-hide'>
+					{todos.length === 0 && (
+						<div className='h-full w-full flex justify-center items-center'>
+							<span
+								className='text-[var(--fourtiary-color)] text-center text-xs'
+								onDoubleClick={() => setShowTodoList(!showTodoList)}
+							>
+								add new tasks by clicking on the plus icon
+								<br />
+								or hide this block by double clicking on this text
+							</span>
+						</div>
+					)}
 					{todos.map(todo => (
 						<Todo
 							key={todo.id}

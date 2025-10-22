@@ -41,10 +41,20 @@ export function TimerControlsPanel({
 						py-2
 						flex items-center justify-center 
 						transition-all duration-300 ease-out
+						scale-85 sm:scale-100
 						${
-							(show && (index === 0 ? 'delay-0 -translate-y-54' : '')) ||
-							(show && (index === 1 ? 'delay-150 -translate-y-56' : '')) ||
-							(show && (index === 2 ? 'delay-300 -translate-y-54' : ''))
+							(show &&
+								(index === 0
+									? 'delay-0 -translate-y-40 sm:-translate-y-54'
+									: '')) ||
+							(show &&
+								(index === 1
+									? 'delay-150 -translate-y-43 sm:-translate-y-56'
+									: '')) ||
+							(show &&
+								(index === 2
+									? 'delay-300 -translate-y-40 sm:-translate-y-54'
+									: ''))
 						}
 					`}
 					>
