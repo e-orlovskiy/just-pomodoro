@@ -1,6 +1,7 @@
 import { ModalProvider } from '@/app/contexts/ModalContext'
 import type { Metadata } from 'next'
 import { Kode_Mono } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const KodeMono = Kode_Mono({
@@ -9,6 +10,7 @@ const KodeMono = Kode_Mono({
 })
 
 export const metadata: Metadata = {
+	metadataBase: new URL('https://just-pomodoro-sandy.vercel.app/'),
 	title: {
 		default: 'Just Pomodoro - productivity timer',
 		template: '%s | Just Pomodoro'
@@ -54,6 +56,7 @@ export default function RootLayout({
 					{children}
 					{modal} {/* @modal (settings) content*/}
 				</ModalProvider>
+				<Analytics />
 			</body>
 		</html>
 	)
