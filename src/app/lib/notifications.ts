@@ -1,11 +1,13 @@
 class NotificationManager {
 	private permission: NotificationPermission = 'default'
+	private initialized = false
 
-	constructor() {
-		this.checkPermission()
-	}
+	// constructor() {
+	// 	this.checkPermission()
+	// }
 
 	private checkPermission() {
+		if (typeof window === 'undefined') return
 		if (!('Notification' in window)) {
 			console.warn('this browser does not support notifications')
 			return
@@ -13,7 +15,16 @@ class NotificationManager {
 		this.permission = Notification.permission
 	}
 
+	private ensureInitialized() {
+		if (!this.initialized && typeof window !== 'undefined') {
+			this.checkPermission()
+			this.initialized = true
+		}
+	}
+
 	async requestPermission(): Promise<boolean> {
+		this.ensureInitialized()
+		if (typeof window === 'undefined') return false
 		if (!('Notification' in window)) return false
 		try {
 			const permission = await Notification.requestPermission()
@@ -26,6 +37,8 @@ class NotificationManager {
 	}
 
 	showNotification(title: string, options?: NotificationOptions) {
+		this.ensureInitialized()
+		if (typeof window === 'undefined') return null
 		if (!('Notification' in window) || this.permission !== 'granted') {
 			console.log('❌ Notifications not available:', {
 				supported: 'Notification' in window,
@@ -48,10 +61,13 @@ class NotificationManager {
 	}
 
 	getPermissionStatus(): NotificationPermission {
+		this.ensureInitialized()
 		return this.permission
 	}
 
 	isSupported(): boolean {
+		this.ensureInitialized()
+		if (typeof window === 'undefined') return false
 		return 'Notification' in window
 	}
 }
