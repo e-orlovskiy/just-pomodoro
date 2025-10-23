@@ -2,7 +2,6 @@ import { TimerControlsPanel } from '@/components/timer/controls/TimerControlsPan
 import { ProgressRing } from '@/components/timer/display/ProgressRing'
 import { formatTime } from '@/lib/utils/formatTime'
 import { useState } from 'react'
-import Image from 'next/image'
 
 interface TimerDisplayProps {
 	time: number

@@ -8,7 +8,7 @@ interface TooltipProps {
 	width?: number
 }
 
-export function Tooltip({ content, children, width = 420 }: TooltipProps) {
+export function Tooltip({ content, children }: TooltipProps) {
 	const [isVisible, setIsVisible] = useState(false)
 
 	return (

@@ -5,8 +5,7 @@ export function Switch({
 	value: boolean
 	onChange: (value: boolean) => void
 }) {
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		console.log(`switch changed to: ${!value}`)
+	const handleChange = () => {
 		onChange(!value)
 	}
 
