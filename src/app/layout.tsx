@@ -9,8 +9,33 @@ const KodeMono = Kode_Mono({
 })
 
 export const metadata: Metadata = {
-	title: 'Pomodoro',
-	description: 'Pomodoro timer app'
+	title: {
+		default: 'Just Pomodoro - productivity timer',
+		template: '%s | Just Pomodoro'
+	},
+	description:
+		'Boost your productivity with Just Pomodoro. A Pomodoro timer, problem solver, and statistics all in one app.',
+	keywords:
+		'pomodoro timer, timer, productivity, focus, time management, pomodoro technique, pomodoro',
+	openGraph: {
+		title: 'Just Pomodoro - Productivity Timer',
+		description: 'Focus. Work. Repeat.',
+		type: 'website',
+		images: [
+			{
+				url: '/og-image.png',
+				width: 1200,
+				height: 630,
+				alt: 'Just Pomodoro - Focus. Work. Repeat.'
+			}
+		]
+	},
+	twitter: {
+		card: 'summary_large_image',
+		title: 'Just Pomodoro - Productivity Timer',
+		description: 'Focus. Work. Repeat.',
+		images: ['/og-image.png']
+	}
 }
 
 export default function RootLayout({
@@ -18,7 +43,7 @@ export default function RootLayout({
 	modal //@modal
 }: Readonly<{
 	children: React.ReactNode
-	modal: React.ReactNode // auto prop
+	modal: React.ReactNode
 }>) {
 	return (
 		<html lang='en'>
