@@ -27,11 +27,13 @@ export function SettingsGroup({
 }) {
 	return (
 		<div className='flex justify-between items-center'>
-			<div className='flex items-center gap-2'>
-				<p className='text-[var(--tertiary-color)] text-lg'>{title}</p>
+			<div className='flex items-center gap-2 min-w-0 flex-1 mr-2'>
+				<p className='text-[var(--tertiary-color)] text-left text-sm sm:text-lg whitespace-nowrap overflow-hidden text-ellipsis min-w-0'>
+					{title}
+				</p>
 				{tooltip && (
 					<Tooltip content={tooltip}>
-						<span className='text-[var(--fourtiary-color)] cursor-help text-sm'>
+						<span className='text-[var(--fourtiary-color)] cursor-help text-sm flex-shrink-0'>
 							?
 						</span>
 					</Tooltip>

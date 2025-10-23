@@ -22,7 +22,7 @@ export default function InterceptedSettingsPage() {
 
 	return (
 		<div
-			className='absolute inset-0 flex justify-center items-center z-50 bg-black/15 backdrop-blur-sm transition-all duration-150 animate-fadeIn'
+			className='absolute h-full w-full inset-0 flex justify-center items-center z-50 bg-black/15 backdrop-blur-sm transition-all duration-150 animate-fadeIn'
 			onClick={e => {
 				e.stopPropagation()
 				handleClose()

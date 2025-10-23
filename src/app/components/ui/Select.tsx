@@ -42,8 +42,8 @@ export function Select({
 				type='button'
 				onClick={() => setIsOpen(!isOpen)}
 				className='
-          w-[140px] h-[36px] bg-[var(--secondary-color)] 
-          rounded-full p-1 pl-3 pr-3 text-lg
+          sm:w-[140px] sm:h-[36px] w-[110px] h-[32px] bg-[var(--secondary-color)] 
+          rounded-full p-1 pl-3 pr-3 text-md sm:text-lg
           flex items-center justify-between
           text-[var(--tertiary-color)] cursor-pointer
           hover:bg-[var(--secondary-color)]/80

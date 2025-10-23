@@ -76,3 +76,19 @@ ol > li {
 .scrollbar-hide::-webkit-scrollbar {
 	display: none; /* Chrome, Safari and Opera */
 }
+
+.settings-text {
+	font-size: 16px;
+}
+
+@media (max-width: 400px) {
+	.settings-text {
+		font-size: 16px;
+	}
+}
+
+@media (max-width: 640px) {
+	.text-adaptive {
+		font-size: 18px;
+	}
+}

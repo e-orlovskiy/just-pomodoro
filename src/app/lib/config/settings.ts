@@ -9,7 +9,7 @@ export const createTimeSettings = (
 	onSettingsChange: (settings: Partial<ISettings>) => void
 ): ISettingsGroup[] => [
 	{
-		title: 'pomodoro (minutes)',
+		title: 'pomodoro (min)',
 		value: draftSettings.pomodoroTime,
 		type: 'input',
 		onChange: (value: number | string | boolean) => {
@@ -18,7 +18,7 @@ export const createTimeSettings = (
 		}
 	},
 	{
-		title: 'short break (minutes)',
+		title: 'short break (min)',
 		value: draftSettings.shortBreakTime,
 		type: 'input',
 		onChange: (value: number | string | boolean) => {
@@ -27,7 +27,7 @@ export const createTimeSettings = (
 		}
 	},
 	{
-		title: 'long break (minutes)',
+		title: 'long break (min)',
 		value: draftSettings.longBreakTime,
 		type: 'input',
 		onChange: (value: number | string | boolean) => {

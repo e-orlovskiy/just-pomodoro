@@ -25,7 +25,41 @@ export function TimerControlsPanel({
 
 	return (
 		<>
-			<div className='absolute inset-0 flex items-center justify-center gap-3 z-10'>
+			{/* mobile version */}
+			<div className='sm:hidden absolute top-14 left-0 right-0 flex justify-center items-center gap-2 z-50 px-4'>
+				{CONTROLS_MAP.map(control => (
+					<button
+						key={control.name}
+						onClick={e => {
+							e.stopPropagation()
+							control.action()
+						}}
+						className='
+							p-1
+							rounded-xl
+							bg-[var(--primary-color)]
+							flex items-center justify-center 
+							transition-all duration-300
+						'
+					>
+						<Image
+							src={`/icons/${control.icon}.svg`}
+							alt={control.name}
+							width={32}
+							height={32}
+							className='
+								opacity-60 
+								transition-all duration-300 
+								group-hover:opacity-100 
+								group-hover:scale-105
+							'
+						/>
+					</button>
+				))}
+			</div>
+
+			{/* Десктоп версия */}
+			<div className='hidden sm:flex absolute inset-0 items-center justify-center gap-3 z-10'>
 				{CONTROLS_MAP.map((control, index) => (
 					<button
 						key={control.name}
@@ -34,29 +68,19 @@ export function TimerControlsPanel({
 							control.action()
 						}}
 						className={`
-						group rounded-full 
-						text-center
-						bg-[var(--secondary-color)]
-						px-2
-						py-2
-						flex items-center justify-center 
-						transition-all duration-300 ease-out
-						scale-85 sm:scale-100
-						${
-							(show &&
-								(index === 0
-									? 'delay-0 -translate-y-40 sm:-translate-y-54'
-									: '')) ||
-							(show &&
-								(index === 1
-									? 'delay-150 -translate-y-43 sm:-translate-y-56'
-									: '')) ||
-							(show &&
-								(index === 2
-									? 'delay-300 -translate-y-40 sm:-translate-y-54'
-									: ''))
-						}
-					`}
+							group rounded-full 
+							bg-[var(--secondary-color)]
+							px-2
+							py-2
+							flex items-center justify-center 
+							transition-all duration-300 ease-out
+							${
+								(show && (index === 0 ? 'delay-0 z-50 -translate-y-54' : '')) ||
+								(show &&
+									(index === 1 ? 'delay-150 -z-50 -translate-y-56' : '')) ||
+								(show && (index === 2 ? 'delay-300 z-50 -translate-y-54' : ''))
+							}
+						`}
 					>
 						<Image
 							src={`/icons/${control.icon}.svg`}
@@ -64,12 +88,12 @@ export function TimerControlsPanel({
 							width={36}
 							height={36}
 							className='
-							rounded-full
-							opacity-60 
-							transition-all duration-300 
-							group-hover:opacity-100 
-							group-hover:scale-105
-						'
+								rounded-full
+								opacity-60 
+								transition-all duration-300 
+								group-hover:opacity-100 
+								group-hover:scale-105
+							'
 						/>
 					</button>
 				))}

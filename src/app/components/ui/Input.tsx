@@ -16,7 +16,7 @@ export function Input({
 	return (
 		<>
 			<input
-				className='text-[var(--tertiary-color)] text-lg bg-[var(--secondary-color)] w-[70px] h-[36px] p-1 rounded-full text-center border-none outline-none'
+				className='text-[var(--tertiary-color)] text-md sm:text-lg bg-[var(--secondary-color)] w-[55px] h-[32px] sm:w-[70px] sm:h-[36px] p-1 rounded-full text-center border-none outline-none'
 				value={value}
 				type='text'
 				onChange={handleChange}

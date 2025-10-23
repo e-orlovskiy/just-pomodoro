@@ -11,8 +11,6 @@ export function useTimerTitle() {
 	useEffect(() => {
 		let title: string
 
-		console.log('testing')
-
 		if (isTimerCompleted) {
 			title = "Time's up!"
 		} else {
@@ -27,7 +25,6 @@ export function useTimerTitle() {
 			title = `${statusIcon} ${timeString} - ${modeString}`
 		}
 
-		console.log('Setting title:', title)
 		document.title = title
 	}, [timeLeft, mode, isRunning, isTimerCompleted])
 }

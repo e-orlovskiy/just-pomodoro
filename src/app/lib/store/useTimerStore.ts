@@ -128,7 +128,6 @@ export const useTimerStore = create<TimerState>()(
 					state.settings.browserNotifications &&
 					notificationManager.isSupported()
 				) {
-					console.log('🔔 Attempting to show notification for:', state.mode)
 					const modeMessages = {
 						pomodoro: {
 							title: 'Pomodoro Completed! 🎉',

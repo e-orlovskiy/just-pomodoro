@@ -25,7 +25,9 @@ export function SettingsSection({
 					width={20}
 					objectFit='cover'
 				/>
-				<h3 className='font-semibold text-center text-2xl'>{title}</h3>
+				<h3 className='font-semibold text-center text-xl sm:text-2xl'>
+					{title}
+				</h3>
 			</div>
 			<div className='flex flex-col rounded-xl bg-[var(--settings-bg-color)] p-4 gap-3'>
 				{children}
